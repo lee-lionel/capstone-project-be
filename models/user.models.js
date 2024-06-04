@@ -18,11 +18,6 @@ const levelSchema = new Schema({
         "Sec 2",
         "Sec 3",
         "Sec 4",
-        "JC 1",
-        "JC 2",
-        "Poly 1",
-        "Poly 2",
-        "Poly 3",
       ],
     },
   });
@@ -30,6 +25,20 @@ const levelSchema = new Schema({
   const subjectSchema = new Schema({
     name: {
       type: String,
+      enum: [
+        "English",
+        "Mathematics",
+        "Chinese",
+        "Malay",
+        "Tamil",
+        "Science",
+        "Principle of Accounts",
+        "Chemistry",
+        "Biology",
+        "Physics",
+        "History",
+        "Geography",
+      ]
     },
     levels: [levelSchema],
   });
