@@ -49,7 +49,7 @@ async function updateProfile(req, res) {
 
 async function getProfile(req, res) {
   try {
-    const user = await User.find({ _id: req.params });
+    const user = await User.findById(req.params.id);
     return res.status(200).json(user);
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -58,7 +58,7 @@ async function getProfile(req, res) {
 
 async function listTutors(req, res) {
   try {
-    const tutors = await User.find({ role: "tutor" });
+    const tutors = await User.find({ role: "tutor", showProfile: true });
     res.status(200).json(tutors);
   } catch (error) {
     res.status(500).json({ error: error.message });

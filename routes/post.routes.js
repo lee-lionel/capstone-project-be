@@ -7,3 +7,5 @@ router.post('/create', postCtrl.create)
 router.get('/', postCtrl.getPosts)
 
 router.delete('/delete/:id', postCtrl.deletePost)
+
+module.exports = router

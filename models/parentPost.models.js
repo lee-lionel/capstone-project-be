@@ -2,11 +2,15 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const parentPost = new Schema({
+    createdBy: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true,
     },
-    subject: {
+    subjects: {
         type: [String],
         required: true,
     },

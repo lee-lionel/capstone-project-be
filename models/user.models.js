@@ -54,7 +54,7 @@ const userSchema = new Schema(
         "Geography",
       ],
     },
-    level: {
+    levels: {
       type: [String],
       enum: [
         "Pri 1",
@@ -92,6 +92,10 @@ const userSchema = new Schema(
         },
       },
     ],
+    showProfile: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
