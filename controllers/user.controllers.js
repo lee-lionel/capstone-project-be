@@ -1,14 +1,29 @@
 const User = require("../models/user.models");
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken')
+
+function createJWT(user) {
+    return jwt.sign(
+      { user },
+      process.env.SECRET,
+      { expiresIn: "24h" }
+    );
+  }
 
 async function create(req, res) {
   try {
     const newUserDetails = req.body;
+    const existingUsers = await User.find({ email: newUserDetails.email})
+    if(existingUsers.length > 0) throw new Error ('User Already Exists')
     const newUser = await User.create(newUserDetails);
-    return res.status(201).json(newUser);
+    const token = createJWT(newUser)
+    return res.status(201).json({
+        token: token,
+        role: newUser.role
+    });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: error.message });
+    return res.status(500).send({ message: error.message });
   }
 }
 
@@ -25,13 +40,18 @@ async function signIn(req, res) {
       ],
     });
     console.log(user);
-    if (!user) throw new Error();
+    if (!user) throw new Error('User not found');
     const match = await bcrypt.compare(req.body.password, user.password);
-    if (!match) throw new Error();
+    if (!match) throw new Error('Incorrect Password');
     console.log("Sign in Successful");
-    res.status(201).send(user, user.role);
-  } catch {
-    res.status(400).json("Bad Credentials");
+    const token = createJWT(user)
+    console.log(token)
+    return res.status(201).json({
+        token: token,
+        role: user.role
+    });
+  } catch(error) {
+    res.status(400).json({message: error.message});
   }
 }
 

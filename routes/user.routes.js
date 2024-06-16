@@ -12,6 +12,6 @@ router.get('/list-tutors', userCtrl.listTutors)
 
 router.put('/add-feedback/:id', userCtrl.addFeedback)
 
-router.get('/:id', userCtrl.getProfile)
+router.get('/getMe/:id', userCtrl.getProfile)
 
 module.exports = router
