@@ -3,8 +3,14 @@ const Schema = mongoose.Schema
 
 const parentPost = new Schema({
     createdBy: {
-        type: String,
-        required: true
+        id: {
+            type: String,
+            required: true,
+        },
+        name: {
+            type: String,
+            required: true,
+        }
     },
     title: {
         type: String,
@@ -22,9 +28,10 @@ const parentPost = new Schema({
         type: String,
         enum: ["North", "North-East", "Central", "East", "West"],
     },
-    applicants: {
-        type: [String],
-    },
+    applicants: [{
+        id: String,
+        name: String,
+    }],
     foundTutor: {
         type: Boolean,
         default: false

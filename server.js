@@ -12,6 +12,9 @@ app.use(express.json())
 app.use('/api/users', userRoute)
 app.use('/api/posts', postRoute)
 
+// const seeding = require('./models/seedData')
+// seeding.seedTutors()
+
 const PORT = process.env.PORT
 
 app.listen(PORT, function() {

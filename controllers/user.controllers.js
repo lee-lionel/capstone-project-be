@@ -85,20 +85,6 @@ async function listTutors(req, res) {
   }
 }
 
-async function addFeedback(req, res) {
-  try {
-    const { id } = req.params;
-    const feedback = req.body;
-
-    const user = await User.findById(id);
-    user.feedback.push(feedback);
-    await user.save();
-
-    res.json({ message: "Feedback added successfully" });
-  } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-}
 
 module.exports = {
   create,
@@ -106,5 +92,4 @@ module.exports = {
   updateProfile,
   getProfile,
   listTutors,
-  addFeedback,
 };
